@@ -56,8 +56,8 @@ df %>% summarise(across(.cols=c(everything(), -c("id")), .fns=sum))
 map_dfc(df %>% select(.cols=c(everything(), -"id")), ~sum(.)) 
 
 #3
-map_dbl(df, ~ sum(.))
-
+map_dbl(df, ~ sum(.))   # Returns a named dbl vector.
+map_dfc(df, ~ sum(.))   # Returns a tibble. 
 
 
 
