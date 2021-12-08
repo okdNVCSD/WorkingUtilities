@@ -1,3 +1,10 @@
+## An example of negated column indexing...
+select(df, -any_of(excluded_vars)) 
+#is now the safest way to do this (the code will not break if a variable name that doesn't exist in df is included in excluded_vars). 
+#This construct should be applied to filters as well.
+
+
+## Now setting up colwise operations.
 set.seed(121)
 df <- tibble(id = 1:4, w = runif(4), x = runif(4), y = runif(4), z = runif(4))
 df
