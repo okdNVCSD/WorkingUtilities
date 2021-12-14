@@ -34,4 +34,8 @@ sapply(cmbPredicates, mapply, aa2)
 sapply(cmb, mapply, aa2) %>% as.data.frame() %>% reduce(`|`)
 [1] TRUE   NA TRUE
               
+# Above are non-tidy ways. Purrr methods will be edited and cleaned up...  Since invoke functions are retired, should switch with map or rlang::exec function. 
+funs <- list(sd=sd, mean=mean)
+trees %>% map_df(~invoke_map(funs, ,.), .id="id")
               
+          
