@@ -9,3 +9,8 @@ tmp1_vars <- tmp1s %>% purrr::map(~ expr(ifelse(like(End_splits, !!.x), 1, 0))) 
   purrr::set_names(paste0("tmp1_", gsub("\\s|/", "", tmp1s)))
 
 mutate(dfc1, !!!tmp1_vars) %>% View()
+
+
+
+## Another example of tidy expression...
+mutate(essay = paste(!!!syms(essay_cols))) %>%
