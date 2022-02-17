@@ -16,9 +16,11 @@ mutate(dfc1, !!!tmp1_vars) %>% View()
 mutate(essay = paste(!!!syms(essay_cols))) %>%
 
 
+
+
 t <- parse(text="everything()")
 t <- parse(text="c('schoolID')")
-
-
 t1 <- expr(c("schoolID"))
 eval(expr(dfStudentsList %>% select(all_of(eval(t1)))))
+
+
