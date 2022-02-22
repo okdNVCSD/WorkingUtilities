@@ -54,3 +54,26 @@ EndorsementsCertification_Tests <- list(
 EndoCerts_Categorize_Helper <- EndorsementsCertification_Tests %>% map(., ~ expr( str_detect(Endorsements_splits, !!.x) ) ) %>% 
   set_names(Endorsements_CategoryName)
 dfCertifiedTeachers_File %>% mutate(!!!EndoCerts_Categorize_Helper) %>% View()
+
+
+
+
+
+#### Amazing stuff with tidy expression...
+# tmp1s <- dfCertifiedTeachers$End_splits[[961]]
+# tmp1 = tmp1s[1:2]
+# tmp1_vars <- tmp1s %>% purrr::map(~ expr(ifelse(like(End_splits, !!.x), 1, 0))) %>% 
+#   purrr::set_names(paste0("tmp1_", gsub("\\s|/", "", tmp1s)))
+# mutate(dfc1, !!!tmp1_vars) %>% View()
+### RegEx pattern samples... 
+# phone <- regex("
+#   ^\\(?       # optional opening parens
+#   (\\d{3})   # area code
+#   \\)?       # optional closing parens
+#   (?:-|\\ )? # optional dash or space
+#   (\\d{3})   # another three numbers
+#   (?:-|\\ )? # optional dash or space
+#   (\\d{4})   # three more numbers
+#   ", comments = TRUE)
+# str_detect(c("514-791-8141", "(514) 791 8141", "22-333-2222", "2223-333-222"), phone)
+
