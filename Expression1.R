@@ -30,3 +30,27 @@ expr(str_detect(!!sym(c2), "Science|Computer|Major")) -> aa ## aa could be more 
 # mutate, it will mutate multiple columns at once....
 
 dfCertifiedTeachers_File %>% mutate(!!!aa) %>% View()
+
+
+### Non working exam[ple... 
+Math_TestExpStr <- "(\\b((?i)Math|Mathematics(?-i)).*\\b(\\w)?)"
+Science_TestExpStr <- "(^((?!.*(?i)computer(?-i))(?!.*(?i)Political(?-i)))(?!.*(?i)Health(?-i))(?!.*(?i)Library(?-i))(?!.*(?i)Forensic(?-i))(.*(?i)science(?-i)))|([\\*.]?\\b((?i)Biology(?-i)|(?i)Chemistry(?-i)|(?i)Botany(?-i)|(?i)Geology(?-i)|(?i)Physics(?-i)|(?i)Physiology(?-i)|(?i)zoology(?-i))\\b(\\w)?)"
+ComputerScience_TestExpStr <-  "(?i)(computer.*\\s*(programming|application|Electronics|Literacy|application|system|science|Software))(?-i)|((?i)(digital\\s*game\\s*development)|(Information\\s*(technology|technologies))|(CTE\\s*Technology\\s*Education)(?-i))"
+
+Math_TestExp <- regex(Math_TestExpStr, comments=TRUE, ignore_case=TRUE)
+Science_TestExp <- regex(Science_TestExpStr, comments=TRUE, ignore_case=TRUE)
+ComputerScience_TestExp <- regex(ComputerScience_TestExpStr, comments=TRUE, ignore_case=TRUE)
+
+Endorsements_CategoryName <- c(
+  "Math_Endorsed_test", 
+  "Science_Endorsed_test", 
+  "CompSci_Endorsed_test"
+)
+EndorsementsCertification_Tests <- list(
+  Math_TestExpStr, 
+  Science_TestExpStr, 
+  ComputerScience_TestExpStr
+)
+EndoCerts_Categorize_Helper <- EndorsementsCertification_Tests %>% map(., ~ expr( str_detect(Endorsements_splits, !!.x) ) ) %>% 
+  set_names(Endorsements_CategoryName)
+
