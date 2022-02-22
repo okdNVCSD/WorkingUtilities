@@ -53,4 +53,4 @@ EndorsementsCertification_Tests <- list(
 )
 EndoCerts_Categorize_Helper <- EndorsementsCertification_Tests %>% map(., ~ expr( str_detect(Endorsements_splits, !!.x) ) ) %>% 
   set_names(Endorsements_CategoryName)
-
+dfCertifiedTeachers_File %>% mutate(!!!EndoCerts_Categorize_Helper) %>% View()
