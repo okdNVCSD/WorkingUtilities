@@ -23,4 +23,10 @@ t <- parse(text="c('schoolID')")
 t1 <- expr(c("schoolID"))
 eval(expr(dfStudentsList %>% select(all_of(eval(t1)))))
 
+### A project that allows generating mulitple columns from a single column in a single run.
+###
+c2 <- "Endorsements"   # columnName
+expr(str_detect(!!sym(c2), "Science|Computer|Major")) -> aa ## aa could be more than just one expr. It could be a list of expressions, when plugged into 
+# mutate, it will mutate multiple columns at once....
 
+dfCertifiedTeachers_File %>% mutate(!!!aa) %>% View()
